@@ -20,7 +20,7 @@ defmodule Blog.Posts do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all(Post) |> Repo.preload([:user])
   end
 
   @doc """
@@ -37,7 +37,7 @@ defmodule Blog.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload([:user])
 
   @doc """
   Creates a post.
@@ -51,7 +51,11 @@ defmodule Blog.Posts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
+  def create_post(user, attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Map.put("user_id", user.id)
+
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
@@ -115,5 +119,5 @@ defmodule Blog.Posts do
     comment_params
     |> Map.put("post_id", post_id)
     |> Comments.create_comment()
-end
+  end
 end

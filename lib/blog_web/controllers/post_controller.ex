@@ -12,12 +12,15 @@ defmodule BlogWeb.PostController do
   end
 
   def new(conn, _params) do
-    changeset = Posts.change_post(%Post{})
+    current_user = conn.assigns.current_user
+    changeset = Posts.change_post(%Post{user_id: current_user.id})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
-    case Posts.create_post(post_params) do
+    current_user = conn.assigns.current_user
+
+    case Posts.create_post(current_user, post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")

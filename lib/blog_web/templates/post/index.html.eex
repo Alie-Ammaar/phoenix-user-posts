@@ -1,4 +1,5 @@
 <h1>Listing Posts</h1>
+<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
 
 <table>
   <thead>
@@ -6,6 +7,7 @@
       <th>Title</th>
       <th>Body</th>
       <th># of Comments</th>
+      <th>Created By</th>
 
       <th></th>
     </tr>
@@ -16,6 +18,7 @@
       <td><%= post.title %></td>
       <td><%= post.body %></td>
       <td><%= get_comments_count(post.id) %></td>
+      <td><%= post_created_by(post) %></td>
 
       <td>
         <span><%= link "Show", to: Routes.post_path(@conn, :show, post) %></span>
@@ -26,5 +29,3 @@
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>

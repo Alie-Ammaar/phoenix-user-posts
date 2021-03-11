@@ -1,6 +1,7 @@
 defmodule Blog.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Blog.Posts.Post
 
   @derive {Inspect, except: [:password]}
   schema "users" do
@@ -8,6 +9,7 @@ defmodule Blog.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    has_many(:posts, Post)
 
     timestamps()
   end

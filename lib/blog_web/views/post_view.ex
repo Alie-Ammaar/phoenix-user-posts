@@ -5,4 +5,10 @@ defmodule BlogWeb.PostView do
   def get_comments_count(post_id) do
     Posts.get_number_of_comments(post_id)
   end
+
+  def post_created_by(post) do
+    if post.user do
+      post.user.email
+    end
+  end
 end

@@ -3,6 +3,13 @@
 <ul>
 
   <li>
+    <strong>Created By:</strong>
+    <%= if @post.user do %>
+      <%= @post.user.email %>
+    <% end %>
+  </li>
+
+  <li>
     <strong>Title:</strong>
     <%= @post.title %>
   </li>
