@@ -1,5 +1,8 @@
 use Mix.Config
 
+# Only in tests, remove the complexity from the password hashing algorithm
+config :bcrypt_elixir, :log_rounds, 1
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -20,3 +23,5 @@ config :blog, BlogWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :bcrypt_elixir, :log_rounds, 4

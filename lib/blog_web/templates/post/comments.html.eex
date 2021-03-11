@@ -7,7 +7,7 @@
 <%= for comment <- @comments do %>
     <div class="comment">
       <div><%= comment.name %></div>
-      <div><%= comment.content%></div>
+      <div><%= comment.content %></div>
     </div>
   <% end %>
 </div>
